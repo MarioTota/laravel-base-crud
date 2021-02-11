@@ -26,7 +26,7 @@ class BeerController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -46,9 +46,15 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Beer $beer)
+    // public function show($id)
     {
-        //
+        // $beer = Beer::findOrFail($id);
+        // if(empty($beer)) {
+        //     abort('404');
+        // }
+
+        return view('beers.show', compact('beer'));
     }
 
     /**

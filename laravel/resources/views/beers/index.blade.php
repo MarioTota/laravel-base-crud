@@ -1,23 +1,14 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.main')
 
-        <title>Laravel</title>
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-       
-    </head>
-    <body>
-        <main class="container">
-            <h1>le mie birre</h1>
-            <table class="table table-dark table-striped table-bordered">
+@section('content')
+    <table class="table table-dark table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>id</th>
                         <th>nome</th>
                         <th>produttore</th>
                         <th>grado alcolico</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,10 +18,13 @@
                             <td>{{ $beer->nome }}</td>
                             <td>{{ $beer->produttore }}</td>
                             <td>{{ $beer->grado_alcolico }}</td>
+                            <td><a href="{{ route('beers.show', ['beer' => $beer->id]) }}" class="btn btn-outline-light">mostra</a></td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-        </main>
-    </body>
-</html>
+@endsection
+
+@section('header')
+     <h1>Le mie birre</h1>
+@endsection
