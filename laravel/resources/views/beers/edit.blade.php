@@ -5,10 +5,10 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('beers.store') }}" method="post">       
+    <form action="{{ route('beers.update', $beer->id) }}" method="post">       
 
             @csrf
-            @method('POST')
+            @method('PUT')
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -22,7 +22,7 @@
 
             <div class="form-group">
                 <label for="nome">Inserisci il nome</label>
-                <input type="text" name="nome" placeholder="Inserisci il nome"  id="nome" class="form-control" value="{{ old('nome') }}"> 
+                <input type="text" name="nome" placeholder="Inserisci il nome"  id="nome" class="form-control" value="{{ $beer->nome }}"> 
             </div>
             {{-- @error('nome')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -30,17 +30,17 @@
 
              <div class="form-group">   
                 <label for="produttore">Inserisci il produttore</label>
-                <input type="text" name="produttore" placeholder="Inserisci il produttore"  id="produttore" class="form-control" value="{{ old('produttore') }}">
+                <input type="text" name="produttore" placeholder="Inserisci il produttore"  id="produttore" class="form-control" value="{{ $beer->produttore }}">
             </div>
 
             <div class="form-group">
                 <label for="grado_alcolico">Inserisci il grado alcolico</label>
-                <input type="text" name="grado_alcolico" placeholder="Inserisci il grado alcolico"  id="grado_alcolico" class="form-control" value="{{ old('grado_alcolico') }}">
+                <input type="text" name="grado_alcolico" placeholder="Inserisci il grado alcolico"  id="grado_alcolico" class="form-control" value="{{ $beer->grado_alcolico }}">
             </div>
 
             <div class="form-group">
                 <label for="nazionalità">Inserisci la nazionalità</label>
-                <input type="text" name="nazionalità" placeholder="Inserisci la nazionalità"  id="nazionalità" class="form-control" value="{{ old('nazionalità') }}">
+                <input type="text" name="nazionalità" placeholder="Inserisci la nazionalità"  id="nazionalità" class="form-control" value="{{ $beer->nazionalità }}">
             </div>
 
             <button type="submit" class="btn btn-lg btn-primary">Salva</button>           

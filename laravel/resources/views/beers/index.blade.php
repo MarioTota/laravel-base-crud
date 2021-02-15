@@ -24,7 +24,15 @@
                             <td>{{ $beer->produttore }}</td>
                             <td>{{ $beer->grado_alcolico }}</td>
                             <td>{{ $beer->nazionalità }}</td>
-                            <td><a href="{{ route('beers.show', ['beer' => $beer->id]) }}" class="btn btn-outline-light">mostra</a></td>
+                            <td style="text-align: center;">
+                                <a href="{{ route('beers.show', ['beer' => $beer->id]) }}" class="btn btn-outline-light"><i class="fas fa-eye"></i></a>
+                                <a href="{{ route('beers.edit', ['beer' => $beer->id]) }}" class="btn btn-outline-light"><i class="far fa-edit"></i></a>
+                                <form action="{{ route('beers.destroy', ['beer' => $beer->id]) }}" method="POST" style="display: inline-block;">
+                                    @csrf 
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-light"><i class="far fa-trash-alt"></i></button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

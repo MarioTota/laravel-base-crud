@@ -41,17 +41,20 @@ class BeerController extends Controller
         // dd($data);
         $request->validate(
             [
-                'nome' => 'required|size:13',
+                'nome' => 'required',
                 'produttore' => 'required',
-                'grado_alcolico' => 'required|max:4',
-                'nazionalità' => 'required'
+                'grado_alcolico' => 'required|size:1',
+                'nazionalità' => 'required|max:10'
             ]
         );
         $beer = new Beer();
-        $beer->nome = $data['nome'];
-        $beer->produttore = $data['produttore'];
-        $beer->grado_alcolico = $data['grado_alcolico'];
-        $beer->nazionalità = $data['nazionalità'];
+        // $beer->nome = $data['nome'];
+        // $beer->produttore = $data['produttore'];
+        // $beer->grado_alcolico = $data['grado_alcolico'];
+        // $beer->nazionalità = $data['nazionalità'];
+
+        $beer->fill($data);
+
         $result = $beer->save();
 
         return redirect()->route('beers.index');
@@ -83,9 +86,9 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Beer $beer)
     {
-        //
+        return view('beers.edit', compact('beer'));
     }
 
     /**
@@ -95,9 +98,12 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Beer $beer)
     {
-        //
+        $data = $request->all();
+        $beer->update($data);
+
+        return redirect()->route('beers.index');
     }
 
     /**
@@ -106,8 +112,9 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Beer $beer)
     {
-        //
+        $beer->delete();
+        return redirect()->route('beers.index');
     }
 }
